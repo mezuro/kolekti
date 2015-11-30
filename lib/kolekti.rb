@@ -1,4 +1,5 @@
 require "kolekti/version"
+require "kolekti/runner"
 
 module Kolekti
   COLLECTORS = []
