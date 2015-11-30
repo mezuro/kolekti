@@ -8,6 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Kolekti::VERSION
   spec.authors       = ["Rafael Reggiani Manzo"]
   spec.email         = ["rr.manzo@gmail.com"]
+  spec.license       = "LGPLv3"
 
   spec.summary       = %q{Provides basic API for KalibroProcessor Collector}
   spec.description   = %q{This gem defines how KalibroCollector expects his collectors to provide the parsed data so it can persist and process those results}
