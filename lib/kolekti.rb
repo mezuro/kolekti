@@ -1,5 +1,9 @@
 require "kolekti/version"
 
 module Kolekti
-  # Your code goes here...
+  COLLECTORS = []
+
+  def self.register_collector(collector)
+    COLLECTORS << collector
+  end
 end

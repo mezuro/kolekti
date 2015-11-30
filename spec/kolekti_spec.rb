@@ -5,7 +5,13 @@ describe Kolekti do
     expect(Kolekti::VERSION).not_to be nil
   end
 
-  it 'does something useful' do
-    expect(false).to eq(true)
+  describe 'methods' do
+    describe 'register_collector' do
+      it 'is expected to add a collector to the list' do
+        Kolekti.register_collector(Object)
+
+        expect(Kolekti::COLLECTORS).to include(Object)
+      end
+    end
   end
 end
