@@ -1,6 +1,6 @@
 module Kolekti
   module Runner
-    class Collector
+    class Main
       attr_reader :repository_path, :wanted_metric_configurations, :runners
 
       def initialize(attributes={})

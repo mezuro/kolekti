@@ -1,6 +1,6 @@
 module Kolekti
   module Runner
-    class Base
+    class BaseMetricRunner
       def self.inherited(subclass)
         Runner::IMPLEMENTED << subclass
       end

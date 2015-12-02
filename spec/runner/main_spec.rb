@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-class RunnerDouble < Kolekti::Runner::Base
+class RunnerDouble < Kolekti::Runner::BaseMetricRunner
   def self.metric_codes
     [FactoryGirl.build(:metric).code.to_sym]
   end
 end
 
-describe Kolekti::Runner::Collector do
+describe Kolekti::Runner::Main do
   let(:repository_path) { 'test' }
   let(:wanted_metric_configurations) { [FactoryGirl.build(:metric_configuration)] }
 

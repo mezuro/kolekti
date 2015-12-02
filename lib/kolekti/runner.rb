@@ -1,5 +1,5 @@
-require 'kolekti/runner/base'
-require 'kolekti/runner/collector'
+require 'kolekti/runner/base_metric_runner'
+require 'kolekti/runner/main'
 
 module Kolekti
   module Runner
