@@ -36,6 +36,9 @@ describe Kolekti::Runner::Collector do
 
   describe 'clean_output' do
     it 'is expected to clean the output files' do
+      RunnerDouble.expects(:clear).with(repository_path)
+
+      subject.clean_output
     end
   end
 end
