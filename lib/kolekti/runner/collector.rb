@@ -12,7 +12,13 @@ module Kolekti
         end
       end
 
-      def run_wanted_metrics; end
+      def run_wanted_metrics
+        self.wanted_metric_configurations.each do |metric_configuration|
+          code = metric_configuration.metric.code.to_sym
+          @runners[code].run(self.repository_path)
+        end
+      end
+
       def clean_output; end
     end
   end

@@ -1,3 +1,5 @@
+require 'kalibro_client'
+
 require "kolekti/version"
 require "kolekti/runner"
 
