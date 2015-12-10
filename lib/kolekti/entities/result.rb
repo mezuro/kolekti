@@ -1,3 +1,5 @@
+require 'kalibro_client'
+
 module Kolekti
   module Entities
     class Result < KalibroClient::Entities::Processor::MetricResult

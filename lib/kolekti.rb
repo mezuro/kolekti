@@ -1,7 +1,6 @@
-require 'kalibro_client'
-
-require "kolekti/version"
-require "kolekti/runner"
+require 'kolekti/version'
+require 'kolekti/entities'
+require 'kolekti/runner'
 
 module Kolekti
   COLLECTORS = []
@@ -10,3 +9,4 @@ module Kolekti
     COLLECTORS << collector
   end
 end
+

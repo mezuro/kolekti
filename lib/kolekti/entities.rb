@@ -1,3 +1,2 @@
-require 'kalibro_client'
-
-module Entities; end
+require 'kolekti/entities/base'
+require 'kolekti/entities/result'
