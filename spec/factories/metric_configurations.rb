@@ -1,3 +1,5 @@
+require 'kalibro_client'
+
 FactoryGirl.define do
   factory :metric_configuration, class: KalibroClient::Entities::Configurations::MetricConfiguration do
     metric { FactoryGirl.build(:metric) }
