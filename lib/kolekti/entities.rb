@@ -1,3 +1,5 @@
 module Kolekti
-  module Entities; end
+  module Entities
+    PERSISTENCE_QUEUE = Queue.new
+  end
 end
