@@ -1,16 +1,15 @@
 require 'spec_helper'
 
-class RunnerDouble < Kolekti::Runner::BaseMetricRunner
-  def self.metric_codes
-    [FactoryGirl.build(:metric).code.to_sym]
-  end
-end
-
-describe Kolekti::Runner::Main do
+describe Kolekti::Runner do
   let(:repository_path) { 'test' }
   let(:wanted_metric_configurations) { [FactoryGirl.build(:metric_configuration)] }
 
   subject { described_class.new({ repository_path: repository_path, wanted_metric_configurations: wanted_metric_configurations }) }
+
+  before :all do
+    @collector = FactoryGirl.build(:collector)
+    Kolekti.register_collector(@collector)
+  end
 
   describe 'initialization' do
     it 'is expected set repository_path' do
@@ -21,14 +20,14 @@ describe Kolekti::Runner::Main do
       expect(subject.wanted_metric_configurations).to eq(wanted_metric_configurations)
     end
 
-    it 'is expected to set the runners list' do
-      expect(subject.runners).to eq({ FactoryGirl.build(:metric).code.to_sym => RunnerDouble })
+    it 'is expected to set the collectors list' do
+      expect(subject.collectors).to eq([@collector])
     end
   end
 
   describe 'run_wanted_metrics' do
     it 'is expected to run for the metrics already associated' do
-      RunnerDouble.expects(:run).with(repository_path)
+      @collector.expects(:collect_metrics).with(repository_path, wanted_metric_configurations)
 
       subject.run_wanted_metrics
     end
@@ -36,7 +35,7 @@ describe Kolekti::Runner::Main do
 
   describe 'clean_output' do
     it 'is expected to clean the output files' do
-      RunnerDouble.expects(:clear).with(repository_path)
+      @collector.expects(:clean).with(repository_path, wanted_metric_configurations)
 
       subject.clean_output
     end
