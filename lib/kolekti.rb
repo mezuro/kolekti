@@ -1,4 +1,5 @@
 require 'kolekti/version'
+require 'kolekti/collector'
 require 'kolekti/runner'
 
 module Kolekti
@@ -7,6 +8,7 @@ module Kolekti
   def self.register_collector(collector)
     COLLECTORS << collector
   end
+
   def self.collectors
     COLLECTORS
   end
