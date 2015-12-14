@@ -1,0 +1,1 @@
+require 'kolekti/analizo/collector'
