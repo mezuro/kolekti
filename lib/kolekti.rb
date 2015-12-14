@@ -2,6 +2,8 @@ require 'kolekti/version'
 require 'kolekti/collector'
 require 'kolekti/entities'
 require 'kolekti/runner'
+require 'kolekti/persistence_strategy'
+require 'kolekti/analizo'
 
 module Kolekti
   COLLECTORS = []
