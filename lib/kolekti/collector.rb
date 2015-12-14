@@ -25,6 +25,8 @@ module Kolekti
 
     def clean(code_directory, wanted_metric_configurations); raise NotImplementedError; end
 
+    protected
+
     def parse_supported_metrics(metrics_path, metric_collector_name, languages)
       supported_metrics = {}
       YAML.load_file(metrics_path)[:metrics].each do | key, value |
