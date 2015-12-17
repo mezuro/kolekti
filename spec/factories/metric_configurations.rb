@@ -12,4 +12,9 @@ FactoryGirl.define do
       sequence(:id, 1)
     end
   end
+
+  factory :other_metric_configuration, parent: :metric_configuration do
+    metric { FactoryGirl.build(:metric, code: 'other') }
+  end
+
 end
