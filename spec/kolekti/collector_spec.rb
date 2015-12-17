@@ -42,20 +42,24 @@ describe Kolekti::Collector do
 
     describe 'parse_supported_metrics' do
       subject { described_class.new("", "", []) }
-      let(:metrics) { {metrics:
-                        {flog:
-                          {name: "Pain",
-                           description: "",
-                           scope: "METHOD",
-                           type: "NativeMetricSnapshot"},
-                         saikuro:
-                          {name: "Cyclomatic Complexity",
-                           description: "",
-                           scope: "METHOD",
-                           type: "NativeMetricSnapshot"}
-                        }
-                      }
-                    }
+      let(:metrics) {
+        {
+          metrics: {
+            flog: {
+              name: "Pain",
+              description: "",
+              scope: "METHOD",
+              type: "NativeMetricSnapshot"
+            },
+            saikuro: {
+              name: "Cyclomatic Complexity",
+               description: "",
+               scope: "METHOD",
+               type: "NativeMetricSnapshot"
+            }
+          }
+        }
+      }
 
       before :each do
         YAML.expects(:load_file).with("lib/metric_collector/native/metric_fu/metrics.yml").returns(metrics)
@@ -65,7 +69,9 @@ describe Kolekti::Collector do
         supported_metrics = { flog: FactoryGirl.build(:flog_metric, description: ''),
                               saikuro: FactoryGirl.build(:saikuro_metric, description: '') }
 
-        expect(subject.parse_supported_metrics("lib/metric_collector/native/metric_fu/metrics.yml", "MetricFu", [:RUBY])).to eq(supported_metrics)
+        # Use :send since method is protected
+        expect(subject.send(:parse_supported_metrics, "lib/metric_collector/native/metric_fu/metrics.yml", "MetricFu",
+                            [:RUBY])).to eq(supported_metrics)
       end
     end
   end
