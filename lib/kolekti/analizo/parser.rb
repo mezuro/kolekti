@@ -12,10 +12,6 @@ module Kolekti
         end
       end
 
-      def self.default_value_from(metric_code)
-        0.0
-      end
-
       private
 
       def parse_file_name(file_name)
@@ -32,6 +28,7 @@ module Kolekti
       end
 
       def parse(result_map)
+        # p result_map
         result_map.each do |code, value|
           metric_configuration = @wanted_metric_configurations[code]
           next if metric_configuration.nil?
@@ -41,7 +38,8 @@ module Kolekti
               "ROOT", metric_configuration, value, KalibroClient::Entities::Miscellaneous::Granularity::SOFTWARE)
           else
             name = module_name(result_map['_filename'].last, result_map['_module'])
-            @persistence_strategy.create_tree_metric_result(name, metric_configuration, value, KalibroClient::Entities::Miscellaneous::Granularity::CLASS)
+            @persistence_strategy.create_tree_metric_result(
+              name, metric_configuration, value, KalibroClient::Entities::Miscellaneous::Granularity::CLASS)
           end
         end
       end
