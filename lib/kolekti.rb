@@ -22,5 +22,9 @@ module Kolekti
     raise ArgumentError.new("Collector #{collector} was not registered!") unless COLLECTORS.include? collector
     COLLECTORS.delete collector
   end
+
+  def self.available_collectors
+    collectors.select(&:available?)
+  end
 end
 
