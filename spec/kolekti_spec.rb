@@ -47,5 +47,49 @@ describe Kolekti do
         end
       end
     end
+
+    describe 'available_collectors' do
+      context 'with no registered collector' do
+        it 'is expected to return an empty list' do
+          expect(Kolekti.available_collectors).to be_empty
+        end
+      end
+
+      context 'with no available collectors' do
+        let(:collector) { FactoryGirl.build(:collector) }
+
+        before do
+          Kolekti.register_collector(collector)
+          collector.expects(:available?).returns false
+        end
+
+        after do
+          Kolekti.unregister_collector(collector)
+        end
+
+        it 'is expected to return an empty list' do
+          expect(Kolekti.available_collectors).to be_empty
+        end
+      end
+
+      context 'with some available and some unavailable collectors' do
+        let(:collectors) { FactoryGirl.build_list(:collector, 3) }
+
+        before do
+          collectors.each(&Kolekti.method(:register_collector))
+          collectors[0].expects(:available?).returns true
+          collectors[1].expects(:available?).returns true
+          collectors[2].expects(:available?).returns false
+        end
+
+        after do
+          collectors.each(&Kolekti.method(:unregister_collector))
+        end
+
+        it 'is expected to return a list with the available collectors' do
+          expect(Kolekti.available_collectors).to eq collectors[0..1]
+        end
+      end
+    end
   end
 end
