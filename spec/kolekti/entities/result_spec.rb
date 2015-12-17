@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Kolekti::Entities::Result do
+describe Kolekti::Entities::Result, pending: 'Probably will go away soon, replaced by PersistenceStrategy' do
   describe 'class_methods' do
     describe 'result_queue' do
       context 'with an empty queue' do
