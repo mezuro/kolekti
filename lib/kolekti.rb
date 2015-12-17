@@ -3,6 +3,8 @@ require 'kolekti/collector'
 require 'kolekti/entities'
 require 'kolekti/runner'
 require 'kolekti/persistence_strategy'
+require 'kolekti/errors'
+
 require 'kolekti/analizo'
 
 module Kolekti
