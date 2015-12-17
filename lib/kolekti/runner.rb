@@ -6,7 +6,11 @@ module Kolekti
 
     def initialize(repository_path, wanted_metric_configurations, persistence_strategy)
       @repository_path = repository_path
-      @wanted_metric_configurations = wanted_metric_configurations.map { |m| [m.metric.code, m] }.to_h
+      @wanted_metric_configurations = if wanted_metric_configurations.is_a? Hash
+        wanted_metric_configurations
+      else
+        wanted_metric_configurations.map { |m| [m.metric.code, m] }.to_h
+      end
       @persistence_strategy = persistence_strategy
       @collectors = find_collectors
     end
@@ -28,7 +32,7 @@ module Kolekti
     def find_collectors
       collectors = wanted_metric_configurations.map do |code, metric_configuration|
         found_collector = Kolekti.collectors.find { |collector| collector.supported_metrics.include? code }
-        raise UnavailbleMetricError.new("No Metric Collector for metric code #{code}") if found_collector.nil?
+        raise UnavailableMetricError.new("No Metric Collector for metric code #{code}") if found_collector.nil?
 
         found_collector
       end
