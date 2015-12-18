@@ -10,13 +10,18 @@ module Kolekti
         super('Analizo', 'description', load_analizo_supported_metrics)
       end
 
+      def available?
+        system('analizo --version', [:out, :err] => '/dev/null') ? true : false
+      end
+
       def collect_metrics(code_directory, wanted_metric_configurations, persistence_strategy)
         parser = Analizo::Parser.new(wanted_metric_configurations, persistence_strategy)
         parser.parse_all(run code_directory)
       end
 
-      def available?
-        system('analizo --version', [:out, :err] => '/dev/null') ? true : false
+
+      def clean(code_directory, wanted_metric_configurations)
+        # pass
       end
 
       protected
