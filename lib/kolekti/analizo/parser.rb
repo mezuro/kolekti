@@ -35,11 +35,11 @@ module Kolekti
 
           if result_map['_filename'].nil?
             @persistence_strategy.create_tree_metric_result(
-              "ROOT", metric_configuration, value, KalibroClient::Entities::Miscellaneous::Granularity::SOFTWARE)
+              metric_configuration, "ROOT", value, KalibroClient::Entities::Miscellaneous::Granularity::SOFTWARE)
           else
             name = module_name(result_map['_filename'].last, result_map['_module'])
             @persistence_strategy.create_tree_metric_result(
-              name, metric_configuration, value, KalibroClient::Entities::Miscellaneous::Granularity::CLASS)
+              metric_configuration, name, value, KalibroClient::Entities::Miscellaneous::Granularity::CLASS)
           end
         end
       end
