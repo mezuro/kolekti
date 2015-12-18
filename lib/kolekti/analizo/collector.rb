@@ -1,5 +1,6 @@
 require 'kalibro_client'
 require 'kolekti/collector'
+require 'kolekti/errors'
 require 'kolekti/analizo/parser'
 
 module Kolekti
@@ -15,7 +16,7 @@ module Kolekti
       end
 
       def available?
-        `analizo --version`.nil? ? false : true
+        system('analizo --version', [:out, :err] => '/dev/null') ? true : false
       end
 
       protected
@@ -38,18 +39,15 @@ module Kolekti
         supported_metrics
       end
 
-      private
-
       def run(code_directory)
         results = `analizo metrics #{code_directory}`
-        raise Errors::NotFoundError.new("BaseTool Analizo not found") if results.nil?
-        raise Errors::NotReadableError.new("Directory not readable") if results.empty?
+        raise Kolekti::CollectorError.new("Analizo failed with exit status: #{$?.exitstatus}") unless $?.success?
         results
       end
 
       def metric_list
         list = `analizo metrics --list`
-        raise Errors::NotFoundError.new("BaseTool Analizo not found") if list.nil?
+        raise Kolekti::CollectorError.new("Analizo failed with exit status: #{$?.exitstatus}") unless $?.success?
         list
       end
     end
