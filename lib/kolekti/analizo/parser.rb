@@ -20,7 +20,7 @@ module Kolekti
       end
 
       def parse_class_name(analizo_module_name)
-        analizo_module_name.split('::').last
+        analizo_module_name.split('::').join('.')
       end
 
       def module_name(file_name, analizo_module_name)
