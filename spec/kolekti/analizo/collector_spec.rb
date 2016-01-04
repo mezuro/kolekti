@@ -5,10 +5,29 @@ require 'spec_helper'
 require 'kalibro_client'
 
 describe Kolekti::Analizo::Collector do
+  subject { described_class.new }
+
+  describe 'default_value_from' do
+    context 'with a valid metric configuration' do
+      let(:metric) { FactoryGirl.build(:analizo_metric) }
+      let(:metric_configuration) { FactoryGirl.build(:metric_configuration, metric: metric) }
+      it 'is expected to return 0.0' do
+        expect(subject.default_value_from(metric_configuration)).to eq(0.0)
+      end
+    end
+
+    context 'with an invalid metric configuration' do
+      let(:metric) { FactoryGirl.build(:flog_metric) }
+      let(:metric_configuration) { FactoryGirl.build(:metric_configuration, metric: metric) }
+      it 'is expected to raise an ArgumentError exception' do
+        expect { subject.default_value_from(metric_configuration) }.to raise_error(ArgumentError)
+      end
+    end
+  end
+
   describe 'run_wanted_metrics' do
     let(:metric_configurations) { [FactoryGirl.build(:metric_configuration)] }
     let(:strategy) { Kolekti::TestPersistenceStrategy.new }
-    subject { described_class.new }
 
     context 'with a C++ repository' do
       let(:repository_path) { Dir::mktmpdir }

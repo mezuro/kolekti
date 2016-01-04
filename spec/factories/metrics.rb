@@ -32,6 +32,14 @@ FactoryGirl.define  do
     scope 'METHOD'
   end
 
+  factory :analizo_metric, parent: :native_metric do
+    languages [:C, :CPP, :JAVA]
+    metric_collector_name "Analizo"
+    scope 'CLASS'
+    name 'acc'
+    code :acc
+  end
+
   factory :flog_metric, parent: :native_metric do
     metric_fu
 

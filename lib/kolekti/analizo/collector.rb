@@ -19,6 +19,14 @@ module Kolekti
         parser.parse_all(run code_directory)
       end
 
+      def default_value_from(metric_configuration)
+        metric = metric_configuration && metric_configuration.metric
+        if metric.nil? || metric.type != 'NativeMetricSnapshot' || metric.metric_collector_name != self.name
+          raise ArgumentError.new("Metric configuration does not belong to analizo")
+        end
+
+        0.0
+      end
 
       def clean(code_directory, wanted_metric_configurations)
         # pass

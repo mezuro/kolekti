@@ -34,6 +34,12 @@ describe Kolekti::Collector do
       end
     end
 
+    describe 'default_value_from' do
+      it 'should raise a NotImplementedError' do
+        expect { subject.default_value_from(nil) }.to raise_error(NotImplementedError)
+      end
+    end
+
     describe 'available?' do
       it 'is expected to raise NotImplementedError' do
         expect { subject.available? }.to raise_error(NotImplementedError)
