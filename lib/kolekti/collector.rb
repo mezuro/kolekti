@@ -25,6 +25,8 @@ module Kolekti
 
     def clean(code_directory, wanted_metric_configurations); raise NotImplementedError; end
 
+    def default_value_from(metric_configuration); raise NotImplementedError; end
+
     protected
 
     def parse_supported_metrics(metrics_path, metric_collector_name, languages)
