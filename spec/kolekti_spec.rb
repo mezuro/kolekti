@@ -91,5 +91,35 @@ describe Kolekti do
         end
       end
     end
+
+    describe 'default_metric_value' do
+      let(:metric) { FactoryGirl.build(:native_metric) }
+      let(:metric_configuration) { FactoryGirl.build(:metric_configuration, metric: metric) }
+
+      context 'with an existing collector' do
+        let(:value) { 1337 }
+
+        before :each do
+          collector.expects(:name).returns(metric_configuration.metric.metric_collector_name)
+          Kolekti.expects(:collectors).returns([collector])
+        end
+
+        it "is expected to get the metric's collector default value" do
+          collector.expects(:default_value_from).with(metric_configuration).returns(value)
+
+          expect(Kolekti.default_metric_value(metric_configuration)).to eq(value)
+        end
+      end
+
+      context 'without an existing collector' do
+        before :each do
+          Kolekti.expects(:collectors).returns([])
+        end
+
+        it 'is expected to return nil' do
+          expect(Kolekti.default_metric_value(metric_configuration)).to be_nil
+        end
+      end
+    end
   end
 end

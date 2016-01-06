@@ -24,5 +24,13 @@ module Kolekti
   def self.available_collectors
     collectors.select(&:available?)
   end
-end
 
+  def self.default_metric_value(metric_configuration)
+    metric = metric_configuration.metric
+
+    collector = collectors.find { |coll| coll.name == metric.metric_collector_name }
+    return nil if collector.nil?
+
+    collector.default_value_from(metric_configuration)
+  end
+end
