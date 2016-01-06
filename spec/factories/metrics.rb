@@ -22,6 +22,7 @@ FactoryGirl.define  do
     code "NM"
     description "A native metric"
     metric_collector_name 'NativeTestCollector'
+    scope 'METHOD'
 
     initialize_with { new(name, code, scope, languages, metric_collector_name) }
   end
