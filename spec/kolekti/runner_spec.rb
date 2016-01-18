@@ -1,9 +1,8 @@
-
 require 'spec_helper'
 
 describe Kolekti::Runner do
   let(:repository_path) { 'test' }
-  let(:persistence_strategy) { Kolekti::TestPersistenceStrategy.new }
+  let(:persistence_strategy) { FactoryGirl.build(:persistence_strategy) }
   let(:wanted_metric_configurations) {
     [
       FactoryGirl.build(:metric_configuration),

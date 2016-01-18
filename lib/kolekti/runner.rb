@@ -6,11 +6,7 @@ module Kolekti
 
     def initialize(repository_path, wanted_metric_configurations, persistence_strategy)
       @repository_path = repository_path
-      @wanted_metric_configurations = if wanted_metric_configurations.is_a? Hash
-        wanted_metric_configurations
-      else
-        wanted_metric_configurations.map { |m| [m.metric.code, m] }.to_h
-      end
+      @wanted_metric_configurations = wanted_metric_configurations.map { |m| [m.metric.code, m] }.to_h
       @persistence_strategy = persistence_strategy
       @collectors = find_collectors
     end
