@@ -28,7 +28,6 @@ module Kolekti
       end
 
       def parse(result_map)
-        # p result_map
         result_map.each do |code, value|
           metric_configuration = @wanted_metric_configurations[code]
           next if metric_configuration.nil?

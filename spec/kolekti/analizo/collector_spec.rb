@@ -54,4 +54,20 @@ describe Kolekti::Analizo::Collector do
       end
     end
   end
+
+  describe 'available?' do
+    context 'when the collector is available' do
+      it 'is expected to return true' do
+        subject.expects(:system).with(regexp_matches(/^analizo\b/), anything).returns(true)
+        expect(subject.available?).to eq true
+      end
+    end
+
+    context 'when the collector is not available' do
+      it 'is expected to return false' do
+        subject.expects(:system).with(regexp_matches(/^analizo\b/), anything).returns(nil)
+        expect(subject.available?).to eq false
+      end
+    end
+  end
 end
