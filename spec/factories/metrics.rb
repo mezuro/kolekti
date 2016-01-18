@@ -2,8 +2,8 @@ require 'kalibro_client'
 
 FactoryGirl.define  do
   factory :metric, class: KalibroClient::Entities::Miscellaneous::Metric do
-    name "Afferent Connections per Class (used to calculate COF - Coupling Factor)"
-    code "acc"
+    name "Total Lines of Code"
+    code "total_loc"
     type 'TestMetricSnapshot'
     scope 'SOFTWARE'
 
