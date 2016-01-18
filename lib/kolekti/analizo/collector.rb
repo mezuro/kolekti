@@ -20,7 +20,7 @@ module Kolekti
       end
 
       def default_value_from(metric_configuration)
-        metric = metric_configuration && metric_configuration.metric
+        metric = !metric_configuration.nil? ? metric_configuration.metric : nil
         if metric.nil? || metric.type != 'NativeMetricSnapshot' || metric.metric_collector_name != self.name
           raise ArgumentError.new("Metric configuration does not belong to analizo")
         end

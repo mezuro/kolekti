@@ -26,7 +26,7 @@ describe Kolekti::Analizo::Collector do
   end
 
   describe 'run_wanted_metrics' do
-    let(:metric_configurations) { [FactoryGirl.build(:metric_configuration)] }
+    let(:metric_configurations) { [FactoryGirl.build(:metric_configuration), FactoryGirl.build(:metric_configuration, metric: FactoryGirl.build(:analizo_metric))] }
     let(:strategy) { FactoryGirl.build(:persistence_strategy) }
 
     context 'with a C++ repository' do
