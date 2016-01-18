@@ -27,7 +27,7 @@ describe Kolekti::Analizo::Collector do
 
   describe 'run_wanted_metrics' do
     let(:metric_configurations) { [FactoryGirl.build(:metric_configuration)] }
-    let(:strategy) { Kolekti::TestPersistenceStrategy.new }
+    let(:strategy) { FactoryGirl.build(:persistence_strategy) }
 
     context 'with a C++ repository' do
       let(:repository_path) { Dir::mktmpdir }
