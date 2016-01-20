@@ -33,14 +33,6 @@ FactoryGirl.define  do
     scope 'METHOD'
   end
 
-  factory :analizo_metric, parent: :native_metric do
-    languages [:C, :CPP, :JAVA]
-    metric_collector_name "Analizo"
-    scope 'CLASS'
-    name 'Afferent Connections per Class (used to calculate COF - Coupling Factor)'
-    code 'acc'
-  end
-
   factory :flog_metric, parent: :native_metric do
     metric_fu
 

@@ -5,8 +5,6 @@ require 'kolekti/runner'
 require 'kolekti/persistence_strategy'
 require 'kolekti/errors'
 
-require 'kolekti/analizo'
-
 module Kolekti
   COLLECTORS = []
 
