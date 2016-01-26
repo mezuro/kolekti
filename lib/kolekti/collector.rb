@@ -31,11 +31,11 @@ module Kolekti
 
     def parse_supported_metrics(metrics_path, metric_collector_name, languages)
       supported_metrics = {}
-      YAML.load_file(metrics_path)[:metrics].each do | key, value |
-        if value[:type] == "NativeMetricSnapshot"
-          supported_metrics[key] = KalibroClient::Entities::Miscellaneous::NativeMetric.new(value[:name], key, value[:scope], languages, metric_collector_name)
+      YAML.load_file(metrics_path)[:metrics].each do | code, metric |
+        if metric[:type] == "NativeMetricSnapshot"
+          supported_metrics[code] = KalibroClient::Entities::Miscellaneous::NativeMetric.new(metric[:name], code, metric[:scope], languages, metric_collector_name)
         else
-          supported_metrics[key] = KalibroClient::Entities::Miscellaneous::HotspotMetric.new(value[:name], key, languages, metric_collector_name)
+          supported_metrics[code] = KalibroClient::Entities::Miscellaneous::HotspotMetric.new(metric[:name], code, languages, metric_collector_name)
         end
       end
       supported_metrics
