@@ -62,6 +62,12 @@ describe Kolekti::Collector do
                description: "",
                scope: "METHOD",
                type: "NativeMetricSnapshot"
+            },
+            flay: {
+              name: 'Duplicate Code',
+              description: '',
+              scope: 'SOFTWARE',
+              type: 'HotspotMetricSnapshot'
             }
           }
         }
@@ -73,7 +79,8 @@ describe Kolekti::Collector do
 
       it 'is expected to return a code => Metric hash' do
         supported_metrics = { flog: FactoryGirl.build(:flog_metric, description: ''),
-                              saikuro: FactoryGirl.build(:saikuro_metric, description: '') }
+                              saikuro: FactoryGirl.build(:saikuro_metric, description: ''),
+                              flay: FactoryGirl.build(:flay_metric, description: '') }
 
         # Use :send since method is protected
         expect(subject.send(:parse_supported_metrics, "lib/metric_collector/native/metric_fu/metrics.yml", "MetricFu",

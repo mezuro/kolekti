@@ -46,4 +46,29 @@ FactoryGirl.define  do
     name "Cyclomatic Complexity"
     code :saikuro
   end
+
+  trait :hotspot do
+    type 'HotspotMetricSnapshot'
+    scope nil
+    languages [:RUBY]
+  end
+
+  factory :hotspot_metric, class: KalibroClient::Entities::Miscellaneous::HotspotMetric do
+    hotspot
+
+    name "Hotspot Metric"
+    code "HM"
+    description "A hotspot metric"
+    metric_collector_name 'HotspotTestCollector'
+
+    initialize_with { new(name, code, languages, metric_collector_name) }
+  end
+
+  factory :flay_metric, parent: :hotspot_metric do
+    metric_fu
+
+    name "Duplicate Code"
+    code :flay
+    scope KalibroClient::Entities::Miscellaneous::Granularity.new(:SOFTWARE)
+  end
 end
