@@ -6,12 +6,18 @@ require 'kolekti/version'
 Gem::Specification.new do |spec|
   spec.name          = "kolekti"
   spec.version       = Kolekti::VERSION
-  spec.authors       = ["Rafael Reggiani Manzo"]
-  spec.email         = ["rr.manzo@gmail.com"]
+  spec.authors       = ["Daniel Miranda",
+                        "Diego Araújo",
+                        "Eduardo Araújo",
+                        "Rafael Reggiani Manzo"]
+  spec.email         = ["danielkza2@gmail.com",
+                        "diegoamc90@gmail.com",
+                        "duduktamg@hotmail.com",
+                        "rr.manzo@protonmail.com"]
   spec.license       = "LGPLv3"
 
-  spec.summary       = %q{Provides basic API for KalibroProcessor Collector}
-  spec.description   = %q{This gem defines how KalibroCollector expects his collectors to provide the parsed data so it can persist and process those results}
+  spec.summary       = %q{Kolekti is a code metric results parser framework.}
+  spec.description   = %q{Kolekti is a code metric results parser framework. You can use it whenever you want structured unique output for different metric collectors.}
   spec.homepage      = "https://github.com/mezuro/kolekti"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
