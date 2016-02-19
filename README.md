@@ -1,16 +1,21 @@
 # Kolekti
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/kolekti`. To experiment with that code, run `bin/console` for an interactive prompt.
+[![Code Climate](https://codeclimate.com/github/mezuro/kolekti.png)](https://codeclimate.com/github/mezuro/kalibro_client)
 
-TODO: Delete this and the text above, and describe your gem
+Kolekti is a code metric results parser framework. You can use it whenever you want structured unique output for different metric collectors.
+
+## Contributing
+
+Please, have a look the wiki pages about development workflow and code standards:
+
+* https://github.com/mezuro/mezuro/wiki/Development-workflow
+* https://github.com/mezuro/mezuro/wiki/Standards
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-```ruby
-gem 'kolekti'
-```
+    gem 'kolekti'
 
 And then execute:
 
@@ -22,15 +27,12 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+You have one key class you need to extend `Kolekti::Collector` implementing the following methods:
 
-## Development
+* `collect_metrics(code_directory, wanted_metric_configurations)`
+* `clean(code_directory, wanted_metric_configurations)`
+* `default_value_from(metric_configuration)`
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Actual examples are:
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/kolekti.
-
+* [KolektiAnalizo](https://github.com/mezuro/kolekti_analizo)
