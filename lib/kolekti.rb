@@ -2,6 +2,7 @@ require 'kolekti/version'
 require 'kolekti/collector'
 require 'kolekti/runner'
 require 'kolekti/persistence_strategy'
+require 'kolekti/memory_persistence_strategy'
 require 'kolekti/errors'
 
 module Kolekti
