@@ -1,5 +1,18 @@
 require 'kolekti/errors'
 
+# SPB runs on CentOS 7, which uses ruby 2.0.0-p598. On that version the Array class
+# does not have the to_h method. The code below is a fix for that and should be removed
+# when CentOS updates its ruby version. Version 2.1.0 already has Array#to_h built-in.
+class Array
+  def to_h
+    result_hash = {}
+    self.each do |label, reading|
+      result_hash[label] = reading
+    end
+    return result_hash
+  end
+end
+
 module Kolekti
   class Runner
     attr_reader :repository_path, :wanted_metric_configurations, :collectors
