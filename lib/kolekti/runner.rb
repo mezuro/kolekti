@@ -6,8 +6,8 @@ require 'kolekti/errors'
 class Array
   def to_h
     result_hash = {}
-    self.each do |label, reading|
-      result_hash[label] = reading
+    self.each do |code, metric_configuration|
+      result_hash[code] = metric_configuration
     end
     return result_hash
   end
