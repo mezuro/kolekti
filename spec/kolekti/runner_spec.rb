@@ -10,11 +10,7 @@ describe Kolekti::Runner do
     ]
   }
   let(:wanted_metric_configurations_hash) { wanted_metric_configurations.map { |mc| [mc.metric.code, mc] }.to_h }
-  let(:collectors) {
-    wanted_metric_configurations.map do |mc|
-      FactoryGirl.build(:collector, supported_metrics: { mc.metric.code => mc.metric })
-    end
-  }
+  let(:collectors) { [DummyCollector, AnotherDummyCollector] }
 
   subject { described_class.new(repository_path, wanted_metric_configurations, persistence_strategy) }
 
@@ -40,14 +36,15 @@ describe Kolekti::Runner do
     end
 
     it 'is expected to set the collectors list' do
-      expect(subject.collectors).to eq(collectors)
+      expect(subject.collectors.first).to be_a(DummyCollector)
+      expect(subject.collectors.last).to be_a(AnotherDummyCollector)
     end
   end
 
   describe 'run_wanted_metrics' do
     it 'is expected to run for the metrics already associated' do
       collectors.each do |collector|
-        collector.expects(:collect_metrics).with(repository_path, wanted_metric_configurations_hash, persistence_strategy)
+        collector.any_instance.expects(:collect_metrics).with(repository_path, wanted_metric_configurations_hash, persistence_strategy)
       end
 
       subject.run_wanted_metrics
@@ -57,7 +54,7 @@ describe Kolekti::Runner do
   describe 'clean_output' do
     it 'is expected to clean the output files' do
       collectors.each do |collector|
-        collector.expects(:clean).with(repository_path, wanted_metric_configurations_hash)
+        collector.any_instance.expects(:clean).with(repository_path, wanted_metric_configurations_hash)
       end
 
       subject.clean_output

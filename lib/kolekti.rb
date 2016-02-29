@@ -9,7 +9,7 @@ module Kolekti
   COLLECTORS = []
 
   def self.register_collector(collector)
-    COLLECTORS << collector
+    COLLECTORS << collector.new
   end
 
   def self.collectors
@@ -17,8 +17,12 @@ module Kolekti
   end
 
   def self.unregister_collector(collector)
-    raise ArgumentError.new("Collector #{collector} was not registered!") unless COLLECTORS.include? collector
-    COLLECTORS.delete collector
+    to_be_deregistered_index = -1
+    COLLECTORS.each_with_index do |kollector, index|
+      (to_be_deregistered_index = index) and break if kollector.is_a?(collector)
+    end
+    raise ArgumentError.new("Collector #{collector} was not registered!") if to_be_deregistered_index == -1
+    COLLECTORS.delete_at(to_be_deregistered_index)
   end
 
   def self.default_metric_value(metric_configuration)

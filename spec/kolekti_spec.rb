@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Kolekti do
-  let(:collector) { FactoryGirl.build(:collector) }
+  let(:collector) { DummyCollector }
 
   it 'has a version number' do
     expect(Kolekti::VERSION).not_to be nil
