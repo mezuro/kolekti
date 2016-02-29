@@ -14,7 +14,7 @@ describe Kolekti do
       end
 
       after :each do
-        Kolekti.unregister_collector(collector)
+        Kolekti.deregister_collector(collector)
       end
 
       describe 'register_collector' do
@@ -52,15 +52,15 @@ describe Kolekti do
         end
 
         after :each do
-          Kolekti.unregister_collector(collector)
+          Kolekti.deregister_collector(collector)
         end
       end
     end
 
-    describe 'unregister_collector' do
+    describe 'deregister_collector' do
       context 'with an unregistered collector' do
         it 'is expected to raise an ArgumentError' do
-          expect { Kolekti.unregister_collector(collector) }.to raise_error(ArgumentError)
+          expect { Kolekti.deregister_collector(collector) }.to raise_error(ArgumentError)
         end
       end
 
@@ -69,7 +69,7 @@ describe Kolekti do
           Kolekti.register_collector(collector)
         end
         it 'is expected to remove the collector from the list' do
-          Kolekti.unregister_collector(collector)
+          Kolekti.deregister_collector(collector)
           expect(Kolekti::COLLECTORS).to_not include collector
         end
       end

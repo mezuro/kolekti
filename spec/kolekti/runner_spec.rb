@@ -22,7 +22,7 @@ describe Kolekti::Runner do
 
   after :each do
     collectors.each do |collector|
-      Kolekti.unregister_collector(collector)
+      Kolekti.deregister_collector(collector)
     end
   end
 
