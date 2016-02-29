@@ -30,6 +30,19 @@ describe Kolekti do
       end
     end
 
+    context 'registration' do
+      context 'when the collector is not available' do
+        before :each do
+          collector.expects(:available?).returns(false)
+        end
+
+        it 'is expected that the collectors list to not include the collector' do
+          Kolekti.register_collector(collector)
+          expect(Kolekti::COLLECTORS).to_not include(collector)
+        end
+      end
+    end
+
     describe 'unregister_collector' do
       context 'with an unregistered collector' do
         it 'is expected to raise an ArgumentError' do
@@ -43,7 +56,7 @@ describe Kolekti do
         end
         it 'is expected to remove the collector from the list' do
           Kolekti.unregister_collector(collector)
-          expect(Kolekti::COLLECTORS).not_to include collector
+          expect(Kolekti::COLLECTORS).to_not include collector
         end
       end
     end

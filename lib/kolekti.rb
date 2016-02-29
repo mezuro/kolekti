@@ -9,7 +9,7 @@ module Kolekti
   COLLECTORS = []
 
   def self.register_collector(collector)
-    COLLECTORS << collector.new
+    COLLECTORS << collector.new if collector.available?
   end
 
   def self.collectors

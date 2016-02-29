@@ -3,4 +3,8 @@ class DummyCollector < Kolekti::Collector
     mc = FactoryGirl.build(:metric_configuration)
     super('name', 'description', { mc.metric.code => mc.metric })
   end
+
+  def self.available?
+    true
+  end
 end
