@@ -17,11 +17,8 @@ module Kolekti
   end
 
   def self.unregister_collector(collector)
-    to_be_deregistered_index = -1
-    COLLECTORS.each_with_index do |kollector, index|
-      (to_be_deregistered_index = index) and break if kollector.is_a?(collector)
-    end
-    raise ArgumentError.new("Collector #{collector} was not registered!") if to_be_deregistered_index == -1
+    to_be_deregistered_index = COLLECTORS.find_index { |kollector| kollector.is_a?(collector) }
+    raise ArgumentError.new("Collector #{collector} was not registered!") if to_be_deregistered_index.nil?
     COLLECTORS.delete_at(to_be_deregistered_index)
   end
 
