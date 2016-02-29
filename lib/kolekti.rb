@@ -21,10 +21,6 @@ module Kolekti
     COLLECTORS.delete collector
   end
 
-  def self.available_collectors
-    collectors.select(&:available?)
-  end
-
   def self.default_metric_value(metric_configuration)
     metric = metric_configuration.metric
 
