@@ -13,7 +13,7 @@ module Kolekti
       end
     end
 
-    def available?; raise NotImplementedError; end
+    def self.available?; raise NotImplementedError; end
 
     def initialize(name, description, supported_metrics)
       @name = name
