@@ -9,7 +9,7 @@ module Kolekti
   COLLECTORS = []
 
   def self.register_collector(collector)
-    COLLECTORS << collector.new if collector.available?
+    COLLECTORS << collector.new if collector.available? && !already_included?(collector)
   end
 
   def self.collectors
@@ -32,5 +32,12 @@ module Kolekti
     return nil if collector.nil?
 
     collector.default_value_from(metric_configuration)
+  end
+
+  private
+
+  def self.already_included?(collector)
+    COLLECTORS.each { |kollector| return true if kollector.is_a?(collector) }
+    return false
   end
 end

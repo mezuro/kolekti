@@ -41,6 +41,20 @@ describe Kolekti do
           expect(Kolekti::COLLECTORS).to_not include(collector)
         end
       end
+
+      context 'when trying to register an already registered collector' do
+        before :each do
+          Kolekti.register_collector(collector)
+        end
+
+        it 'is expected to have only one entry for collector' do
+          expect(Kolekti::COLLECTORS.size).to eq(1)
+        end
+
+        after :each do
+          Kolekti.unregister_collector(collector)
+        end
+      end
     end
 
     describe 'unregister_collector' do
