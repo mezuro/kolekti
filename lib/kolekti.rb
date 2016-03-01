@@ -34,7 +34,6 @@ module Kolekti
   private
 
   def self.already_included?(collector)
-    COLLECTORS.each { |kollector| return true if kollector.is_a?(collector) }
-    return false
+    COLLECTORS.any? { |kollector| kollector.is_a?(collector) }
   end
 end
