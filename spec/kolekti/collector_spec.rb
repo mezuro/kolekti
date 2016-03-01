@@ -42,7 +42,7 @@ describe Kolekti::Collector do
 
     describe 'available?' do
       it 'is expected to raise NotImplementedError' do
-        expect { subject.available? }.to raise_error(NotImplementedError)
+        expect { described_class.available? }.to raise_error(NotImplementedError)
       end
     end
 

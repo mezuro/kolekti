@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Kolekti do
-  let(:collector) { FactoryGirl.build(:collector) }
+  let(:collector) { DummyCollector }
 
   it 'has a version number' do
     expect(Kolekti::VERSION).not_to be nil
@@ -14,7 +14,7 @@ describe Kolekti do
       end
 
       after :each do
-        Kolekti.unregister_collector(collector)
+        Kolekti.deregister_collector(collector)
       end
 
       describe 'register_collector' do
@@ -30,10 +30,37 @@ describe Kolekti do
       end
     end
 
-    describe 'unregister_collector' do
+    context 'registration' do
+      context 'when the collector is not available' do
+        before :each do
+          collector.expects(:available?).returns(false)
+        end
+
+        it 'is expected that the collectors list to not include the collector' do
+          Kolekti.register_collector(collector)
+          expect(Kolekti::COLLECTORS).to_not include(collector)
+        end
+      end
+
+      context 'when trying to register an already registered collector' do
+        before :each do
+          Kolekti.register_collector(collector)
+        end
+
+        it 'is expected to have only one entry for collector' do
+          expect(Kolekti::COLLECTORS.size).to eq(1)
+        end
+
+        after :each do
+          Kolekti.deregister_collector(collector)
+        end
+      end
+    end
+
+    describe 'deregister_collector' do
       context 'with an unregistered collector' do
         it 'is expected to raise an ArgumentError' do
-          expect { Kolekti.unregister_collector(collector) }.to raise_error(ArgumentError)
+          expect { Kolekti.deregister_collector(collector) }.to raise_error(ArgumentError)
         end
       end
 
@@ -42,52 +69,8 @@ describe Kolekti do
           Kolekti.register_collector(collector)
         end
         it 'is expected to remove the collector from the list' do
-          Kolekti.unregister_collector(collector)
-          expect(Kolekti::COLLECTORS).not_to include collector
-        end
-      end
-    end
-
-    describe 'available_collectors' do
-      context 'with no registered collector' do
-        it 'is expected to return an empty list' do
-          expect(Kolekti.available_collectors).to be_empty
-        end
-      end
-
-      context 'with no available collectors' do
-        let(:collector) { FactoryGirl.build(:collector) }
-
-        before do
-          Kolekti.register_collector(collector)
-          collector.expects(:available?).returns false
-        end
-
-        after do
-          Kolekti.unregister_collector(collector)
-        end
-
-        it 'is expected to return an empty list' do
-          expect(Kolekti.available_collectors).to be_empty
-        end
-      end
-
-      context 'with some available and some unavailable collectors' do
-        let(:collectors) { FactoryGirl.build_list(:collector, 3) }
-
-        before do
-          collectors.each(&Kolekti.method(:register_collector))
-          collectors[0].expects(:available?).returns true
-          collectors[1].expects(:available?).returns true
-          collectors[2].expects(:available?).returns false
-        end
-
-        after do
-          collectors.each(&Kolekti.method(:unregister_collector))
-        end
-
-        it 'is expected to return a list with the available collectors' do
-          expect(Kolekti.available_collectors).to eq collectors[0..1]
+          Kolekti.deregister_collector(collector)
+          expect(Kolekti::COLLECTORS).to_not include collector
         end
       end
     end
