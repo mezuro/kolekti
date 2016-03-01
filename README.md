@@ -36,3 +36,7 @@ You have one key class you need to extend `Kolekti::Collector` implementing the 
 Actual examples are:
 
 * [KolektiAnalizo](https://github.com/mezuro/kolekti_analizo)
+
+## Versioning
+
+Kolekti follows the [semantic versioning](http://semver.org/) policy.
