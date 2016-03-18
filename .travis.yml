@@ -1,4 +1,10 @@
 language: ruby
 rvm:
-  - 2.2.3
-before_install: gem install bundler -v 1.10.6
+  - 2.0.0-p598 # CentOS 7
+  - 2.1.5 # Debian 8
+  - 2.3.0
+addons:
+  code_climate:
+    repo_token: f84db5680305389f15a7f7821e197f5377afa11237152d630492542250ebc75c
+before_install:
+  - gem update bundler
