@@ -2,7 +2,7 @@
 
 The Kolekti gem provides a basic API for KalibroProcessor's collectors
 
-== Unreleased
+== v1.0.1 - 23/03/2016
 
 Fix collector selection logic for metrics and correct tests
 
