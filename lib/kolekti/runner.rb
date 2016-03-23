@@ -40,7 +40,10 @@ module Kolekti
 
     def find_collectors
       collectors = wanted_metric_configurations.map do |code, metric_configuration|
-        found_collector = Kolekti.collectors.find { |collector| collector.supported_metrics.include? code }
+        collector_name = metric_configuration.metric.metric_collector_name
+        found_collector = Kolekti.collectors.find { |collector|
+          collector.name == collector_name && collector.supported_metrics.include?(code.to_sym)
+        }
         raise UnavailableMetricError.new("No Metric Collector for metric code #{code}") if found_collector.nil?
 
         found_collector
