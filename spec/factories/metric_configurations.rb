@@ -2,7 +2,7 @@ require 'kalibro_client'
 
 FactoryGirl.define do
   factory :metric_configuration, class: KalibroClient::Entities::Configurations::MetricConfiguration do
-    metric { FactoryGirl.build(:metric) }
+    metric { FactoryGirl.build(:native_metric) }
     weight 1
     aggregation_form 'mean'
     reading_group_id 1
@@ -14,7 +14,6 @@ FactoryGirl.define do
   end
 
   factory :other_metric_configuration, parent: :metric_configuration do
-    metric { FactoryGirl.build(:metric, code: 'other') }
+    metric { FactoryGirl.build(:native_metric, metric_collector_name: 'OtherNativeTestCollector', code: 'other') }
   end
-
 end
