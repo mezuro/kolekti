@@ -41,9 +41,9 @@ module Kolekti
     def find_collectors
       collectors = wanted_metric_configurations.map do |code, metric_configuration|
         collector_name = metric_configuration.metric.metric_collector_name
-        found_collector = Kolekti.collectors.find { |collector|
+        found_collector = Kolekti.collectors.find do |collector|
           collector.name == collector_name && collector.supported_metrics.include?(code.to_sym)
-        }
+        end
         raise UnavailableMetricError.new("No Metric Collector for metric code #{code}") if found_collector.nil?
 
         found_collector
