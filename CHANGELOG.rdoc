@@ -2,6 +2,11 @@
 
 The Kolekti gem provides a basic API for KalibroProcessor's collectors
 
+== Unreleased
+
+* Update Ruby to 2.3.0
+* Update Kalibro Client to version 4
+
 == v1.0.1 - 23/03/2016
 
 Fix collector selection logic for metrics and correct tests
