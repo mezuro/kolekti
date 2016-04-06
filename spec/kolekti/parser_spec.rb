@@ -4,7 +4,7 @@ describe Kolekti::Parser do
   describe 'methods' do
     describe 'parse' do
       it 'is expected to raise a NotImplementedError' do
-        expect { described_class.parse(nil) }.to raise_error(NotImplementedError)
+        expect { described_class.parse(nil, nil) }.to raise_error(NotImplementedError)
       end
     end
 

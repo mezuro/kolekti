@@ -1,6 +1,6 @@
 module Kolekti
   class Parser
-    def self.parse(collected_metrics_hash); raise NotImplementedError; end
+    def self.parse(collected_metrics_hash, metric_configuration); raise NotImplementedError; end
 
     # Sometimes the parser does not generate results for some Module that
     # other may generate. In this we case need a default value to fulfill
