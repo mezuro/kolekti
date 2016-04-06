@@ -4,6 +4,8 @@ The Kolekti gem provides a basic API for KalibroProcessor's collectors
 
 == Unreleased
 
+== v1.1.1 - 06/04/2016
+
 * Add missing argument metric_configuration to Parser#parse
 
 == v1.1.0 - 06/04/2016
