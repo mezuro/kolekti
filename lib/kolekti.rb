@@ -4,6 +4,7 @@ require 'kolekti/runner'
 require 'kolekti/persistence_strategy'
 require 'kolekti/memory_persistence_strategy'
 require 'kolekti/errors'
+require 'kolekti/parser'
 
 module Kolekti
   COLLECTORS = []
