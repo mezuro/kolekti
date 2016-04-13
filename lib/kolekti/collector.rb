@@ -21,7 +21,7 @@ module Kolekti
       @supported_metrics = supported_metrics
     end
 
-    def collect_metrics(code_directory, wanted_metric_configurations); raise NotImplementedError; end
+    def collect_metrics(code_directory, wanted_metric_configurations, persistence_strategy); raise NotImplementedError; end
 
     def clean(code_directory, wanted_metric_configurations); raise NotImplementedError; end
 
