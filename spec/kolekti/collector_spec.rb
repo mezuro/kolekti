@@ -30,7 +30,7 @@ describe Kolekti::Collector do
 
     describe 'collect_metrics' do
       it 'should raise a NotImplementedError' do
-        expect { subject.collect_metrics("", "") }.to raise_error(NotImplementedError)
+        expect { subject.collect_metrics("", "", nil) }.to raise_error(NotImplementedError)
       end
     end
 
