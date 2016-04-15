@@ -1,3 +1,5 @@
+require 'kolekti/persistence_strategy'
+
 module Kolekti
   class MemoryPersistenceStrategy < Kolekti::PersistenceStrategy
     attr_reader :tree_metric_results, :hotspot_metric_results, :related_hotspot_metric_results
