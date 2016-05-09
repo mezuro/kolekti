@@ -6,48 +6,48 @@ The Kolekti gem provides a basic API for KalibroProcessor's collectors
 
 ## v1.1.3 - 15/04/2016
 
-*   Update Collector#collect_metrics signature
-*   Fix requiring memory persistence strategy alone
+* Update Collector#collect_metrics signature
+* Fix requiring memory persistence strategy alone
 
 
 ## v1.1.2 - 06/04/2016
 
-*   Add missing argument persistence_strategy to Parser#parse
+* Add missing argument persistence_strategy to Parser#parse
 
 
 ## v1.1.1 - 06/04/2016
 
-*   Add missing argument metric_configuration to Parser#parse
+* Add missing argument metric_configuration to Parser#parse
 
 
 ## v1.1.0 - 06/04/2016
 
-*   Introduce the Parser class
+* Introduce the Parser class
 
 
 ## v1.0.2 - 30/03/2016
 
-*   Update Ruby to 2.3.0
-*   Update Kalibro Client to version 4
+* Update Ruby to 2.3.0
+* Update Kalibro Client to version 4
 
 
 ## v1.0.1 - 23/03/2016
 
-Fix collector selection logic for metrics and correct tests
+* Fix collector selection logic for metrics and correct tests
 
 ## v1.0.0 - 01/03/2016
 
-Only register collectors if they are available and not already registered
+* Only register collectors if they are available and not already registered
 
 ## v0.0.2 - 24/02/2016
 
-Add backport for Array#to_h on ruby-2.0.0-p598
+* Add backport for Array#to_h on ruby-2.0.0-p598
 
 ## v0.0.1 - 19/02/2016
 
-And the Mezuro team said: "Let there be parsers!"
+* And the Mezuro team said: "Let there be parsers!"
 
-### 
+---
 
 Kolekti. Copyright (C) 2015  The Mezuro Team
 
